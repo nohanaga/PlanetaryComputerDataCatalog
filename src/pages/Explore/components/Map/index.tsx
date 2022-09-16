@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
 import "azure-maps-control/dist/atlas.min.css";
-
+import "azure-maps-drawing-tools/dist/atlas-drawing.min.css";
 import { useExploreSelector } from "../../state/hooks";
 import {
   useMosaicLayer,
@@ -58,7 +58,7 @@ const ExploreMap = () => {
     if (!mapRef.current) {
       const map = new atlas.Map(mapContainerId, {
         view: "Auto",
-        center: center,
+        center:  [138.9725, 37.1508],
         zoom: zoom,
         language: "en-US",
         showFeedbackLink: false,

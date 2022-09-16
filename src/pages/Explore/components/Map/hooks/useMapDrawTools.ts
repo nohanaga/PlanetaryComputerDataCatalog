@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import * as atlas from "azure-maps-control";
 import { drawing } from "azure-maps-drawing-tools";
-
+import { control } from "azure-maps-drawing-tools";
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setBboxDrawMode, setDrawnBbox } from "pages/Explore/state/mapSlice";
 import { getTheme } from "@fluentui/react";
@@ -21,6 +21,10 @@ export const useMapDrawTools = (
     const mgr = new drawing.DrawingManager(mapRef.current, {
       shapeDraggingEnabled: true,
       mode: drawing.DrawingMode.idle,
+      toolbar: new control.DrawingToolbar({
+        position: 'top-right',
+        style: 'dark'
+      })
     });
 
     // Styles for drawn bboxes
@@ -39,7 +43,9 @@ export const useMapDrawTools = (
   const { mode } = drawMgrRef.current.getOptions();
 
   if (!drawnBbox && drawMgrRef.current.getSource().getShapes().length > 0) {
-    drawMgrRef.current.getSource().clear();
+    //drawMgrRef.current.getSource().clear();
+    // シェイプの座標をデバッグ出力
+    console.log(JSON.stringify(drawMgrRef.current.getSource().toJson(), null, '    '));
   }
 
   const handleShapeAdded = (shape: atlas.Shape): void => {
@@ -58,6 +64,7 @@ export const useMapDrawTools = (
 
   // Enable drawing mode
   if (isDrawBboxMode && mode !== drawing.DrawingMode.drawRectangle) {
+    console.log("#### Enable drawing mode");
     drawMgrRef.current.getSource().clear();
     drawMgrRef.current?.setOptions({
       mode: drawing.DrawingMode.drawRectangle,
@@ -72,6 +79,7 @@ export const useMapDrawTools = (
 
   // Disable drawing mode
   if (!isDrawBboxMode && mode !== drawing.DrawingMode.idle) {
+    console.log("#### Disable drawing mode");
     drawMgrRef.current?.setOptions({
       mode: drawing.DrawingMode.idle,
     });

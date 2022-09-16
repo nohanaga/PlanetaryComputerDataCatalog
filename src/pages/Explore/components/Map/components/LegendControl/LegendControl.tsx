@@ -12,6 +12,7 @@ import { useLocalStorage } from "react-use";
 import { useExploreSelector } from "pages/Explore/state/hooks";
 import { controlStyle } from "../PanelControl";
 import Legend from "./Legend";
+import InfoPanel from './InfoPanel';
 
 export const LegendControl = () => {
   const [isOpen, setIsOpen] = useLocalStorage("legend-control-open", true);
@@ -34,7 +35,9 @@ export const LegendControl = () => {
       {legends}
     </Stack>
   );
-
+  const infoPanel = (
+    <InfoPanel />
+  );
   const legendTitle = isOpen ? "Hide Legend" : "Open Legend";
   const legendButton = (
     <div style={buttonStyle} title={legendTitle}>
@@ -53,6 +56,7 @@ export const LegendControl = () => {
   const hasLegends = legends.length > 0;
   return hasLegends ? (
     <div className="explorer-map-component">
+      {infoPanel}
       {legendPanel}
       {legendButton}
     </div>

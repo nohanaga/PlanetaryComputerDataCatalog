@@ -1,6 +1,7 @@
 import { CSSProperties } from "react";
 import { Provider } from "react-redux";
 import "azure-maps-control/dist/atlas.min.css";
+import "azure-maps-drawing-tools/dist/atlas-drawing.min.css";
 import { IStackStyles, Stack, StackItem, useTheme } from "@fluentui/react";
 
 import { store } from "./state/store";

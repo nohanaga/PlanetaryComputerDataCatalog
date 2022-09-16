@@ -473,3 +473,23 @@ ul.summary-list {
 a code {
   color: #006cbe;
 }
+
+.hanapanel {
+    display: flex;
+    flex-flow: column nowrap;
+    width: 370px;
+    height: 200px;
+    box-sizing: border-box;
+    background: rgb(255, 255, 255);
+    padding: 10px 0px;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 1;
+    bottom: 159px;
+    right: 10px;
+    box-shadow: rgb(0 0 0 / 16%) 0px 0px 4px;
+}
+
+#CodeOutput {
+  height: 200px;
+}
