@@ -99,6 +99,7 @@
     "@azure/static-web-apps-cli": "^1.0.1",
     "copy-webpack-plugin": "^11.0.0",
     "cypress": "^10.1.0",
+    "geojson-reducer": "^1.0.3",
     "json-loader": "^0.5.7",
     "nock": "^13.2.7",
     "prettier": "^2.7.1",

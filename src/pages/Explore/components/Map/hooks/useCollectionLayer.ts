@@ -44,7 +44,6 @@ const useCollectionBoundsLayer = (
       if (multiPoly) {
         stacCollectionDatasource.add(multiPoly);
       }
-
       // Sync the line layers with the visibility setting, or if the zoom level is low
       const isCollectionBoundsVisible =
         showCollectionOutline && zoom <= MAX_ZOOM_FOR_COLLECTION_OUTLINE;

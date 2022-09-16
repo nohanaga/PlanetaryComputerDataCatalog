@@ -14,6 +14,8 @@ export const layerControl = new atlas.control.StyleControl({
 
 export const stacItemDatasource = new atlas.source.DataSource();
 export const stacCollectionDatasource = new atlas.source.DataSource();
+// add custom datasource 2022/09/16
+export const customDatasource = new atlas.source.DataSource();
 
 export const collectionLineLayerName = "stac-collection-line";
 export const collectionLineLayer = new atlas.layer.LineLayer(
@@ -116,3 +118,34 @@ export const getUnhighlightItemFn = (map: atlas.Map) => {
     itemHoverLayer.setOptions({ filter: ["==", ["get", "stacId"], ""] });
   };
 };
+
+
+export const itemLineLayerName2 = "stac-item-line2";
+export const itemLineLayer2 = new atlas.layer.LineLayer(
+  customDatasource,
+  itemLineLayerName2,
+  {
+    strokeColor: "rgb(241, 89, 212)",
+    strokeWidth: 3,
+    filter: [
+      "any",
+      ["==", ["geometry-type"], "Polygon"],
+      ["==", ["geometry-type"], "MultiPolygon"],
+    ],
+  }
+);
+
+export const itemOutlineLayerName2 = "stac-item-outline2";
+export const itemOutlineLayer2 = new atlas.layer.LineLayer(
+  customDatasource,
+  itemOutlineLayerName2,
+  {
+    strokeColor: "#fff",
+    strokeWidth: 5,
+    filter: [
+      "any",
+      ["==", ["geometry-type"], "Polygon"],
+      ["==", ["geometry-type"], "MultiPolygon"],
+    ],
+  }
+);

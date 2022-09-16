@@ -26,6 +26,7 @@ const useItemBoundsLayer = (
     if (!mapReady || !map) return;
 
     if (!map.sources.getSources().includes(stacItemDatasource)) {
+      console.log("### useItemBoundsLayer")
       map.sources.add(stacItemDatasource);
       map.layers.add(itemLineLayer, "labels");
       map.layers.add(itemOutlineLayer, itemLineLayer);
@@ -39,7 +40,7 @@ const useItemBoundsLayer = (
       const geom = boundaryPoly as atlas.data.MultiPolygon;
       stacItemDatasource.clear();
       stacItemDatasource.add(geom);
-
+      
       if (detail.showAsLayer) {
         mapRef.current?.setCamera({
           bounds: atlas.data.BoundingBox.fromData(geom),
