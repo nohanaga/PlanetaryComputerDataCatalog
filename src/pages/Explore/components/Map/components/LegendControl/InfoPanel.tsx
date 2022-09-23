@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { geometryCoordinates } from "pages/Explore/components/Map/hooks/useMapDrawTools"
 import {
@@ -7,28 +7,11 @@ import {
   SelectionMode,
   Text,
   Spinner,
-  SpinnerSize,
-  IStackProps,
-  Stack
+  SpinnerSize
  } from "@fluentui/react";
 import {
-  bandOverrideList,
-  columnOrders,
-  mediaTypeOverride,
-  renderItemColumn,
   stacFormatter,
 } from "utils/stac";
-
-const rowProps: IStackProps = { horizontal: true, verticalAlign: 'center' };
-
-const tokens = {
-  sectionStack: {
-    childrenGap: 10,
-  },
-  spinnerStack: {
-    childrenGap: 20,
-  },
-};
 
 const fetchNDVIJson = async (
   url: string,
@@ -78,7 +61,7 @@ const InfoPanel = (values:any) => {
       res.then((returnVal) => {
         stats = returnVal.data;
 
-        if(stats.length==2){
+        if(stats.length===2){
           setItems([
             mkStat("count", stats[0].stats.count[0]),
             mkStat("min", stats[0].stats.min[0]),
