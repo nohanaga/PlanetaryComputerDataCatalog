@@ -17,9 +17,15 @@ const fetchNDVIJson = async (
   url: string,
   geometry: any
 ) => {
+  const headers = {
+    'x-functions-key': process.env.REACT_APP_FUNCIONS_KEY ?? ""
+  }
 
   const resp = await axios.post(url, {
     data: geometry
+  },
+  {
+    headers: headers
   })
   .then((response) => response.data)
   .catch((error) => {
@@ -55,7 +61,7 @@ const InfoPanel = (values:any) => {
         shapelist.push(itemdict)
       }
       
-      const restapiurl = "https://space-hackathon-api.azurewebsites.net/api/Analyze?code=aWndxofEM1ERvhH_S-bQ5zhpTXBXMUYgQvcE8rmQPKAQAzFuiWf3hw=="
+      const restapiurl = "https://space-hackathon-api.azurewebsites.net/api/Analyze"
       let res = fetchNDVIJson(restapiurl, shapelist)
 
       res.then((returnVal) => {
