@@ -26,7 +26,6 @@ const useItemBoundsLayer = (
     if (!mapReady || !map) return;
 
     if (!map.sources.getSources().includes(stacItemDatasource)) {
-      console.log("### useItemBoundsLayer")
       map.sources.add(stacItemDatasource);
       map.layers.add(itemLineLayer, "labels");
       map.layers.add(itemOutlineLayer, itemLineLayer);

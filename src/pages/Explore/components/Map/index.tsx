@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
+import { drawing } from "azure-maps-drawing-tools";
 import "azure-maps-control/dist/atlas.min.css";
 import "azure-maps-drawing-tools/dist/atlas-drawing.min.css";
 import { useExploreSelector } from "../../state/hooks";
@@ -71,7 +72,6 @@ const ExploreMap = () => {
           subscriptionKey: process.env.REACT_APP_AZMAPS_KEY,
         },
       });
-
       map.events.add("ready", onReady);
       map.events.add("moveend", mapHandlers.onMapMove);
       map.events.add("styledata", mapHandlers.onStyleDataLoaded);

@@ -39,7 +39,7 @@ export const HeaderBar: React.FC = () => {
       <div className={headerPipeStyle}>|</div>
       <HeaderLink to="/">
         <Text block variant="large" className={productNameStyle}>
-          Planetary Computer
+          Planetary Computer for AGRI
         </Text>
       </HeaderLink>
       <HeaderLink isNav to="/explore">

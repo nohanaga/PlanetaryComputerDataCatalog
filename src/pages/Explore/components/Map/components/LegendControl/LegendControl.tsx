@@ -36,7 +36,7 @@ export const LegendControl = () => {
     </Stack>
   );
   const infoPanel = (
-    <InfoPanel />
+    <InfoPanel values="test"/>
   );
   const legendTitle = isOpen ? "Hide Legend" : "Open Legend";
   const legendButton = (

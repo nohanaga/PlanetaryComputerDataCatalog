@@ -1,11 +1,10 @@
-import { useRef } from "react";
+import React, { useRef } from 'react'
 import * as atlas from "azure-maps-control";
-import { drawing } from "azure-maps-drawing-tools";
-import { control } from "azure-maps-drawing-tools";
+import * as atlas2 from "azure-maps-drawing-tools";
+
 import { useExploreDispatch, useExploreSelector } from "pages/Explore/state/hooks";
 import { setBboxDrawMode, setDrawnBbox } from "pages/Explore/state/mapSlice";
 import { getTheme } from "@fluentui/react";
-
 const theme = getTheme();
 
 export const useMapDrawTools = (
@@ -13,40 +12,49 @@ export const useMapDrawTools = (
   mapReady: boolean
 ) => {
   const dispatch = useExploreDispatch();
-  const drawMgrRef = useRef<drawing.DrawingManager | null>(null);
+  const drawMgrRef = useRef<atlas2.drawing.DrawingManager | null>(null);
   const { isDrawBboxMode, drawnBbox } = useExploreSelector(s => s.map);
 
   // Initialize the drawing manager when the map is ready
   if (!drawMgrRef.current && mapRef.current && mapReady) {
-    const mgr = new drawing.DrawingManager(mapRef.current, {
+    const mgr = new atlas2.drawing.DrawingManager(mapRef.current, {
       shapeDraggingEnabled: true,
-      mode: drawing.DrawingMode.idle,
-      toolbar: new control.DrawingToolbar({
-        position: 'top-right',
-        style: 'dark'
-      })
+      mode: atlas2.drawing.DrawingMode.idle,
+      toolbar: new atlas2.control.DrawingToolbar({
+        position: "top-right",
+        style: "dark",
+      }),
     });
 
     // Styles for drawn bboxes
     const drawnLayers = mgr.getLayers();
+
     drawnLayers.polygonOutlineLayer?.setOptions({
       strokeColor: theme.palette.themePrimary,
       strokeDashArray: [2, 2],
-      strokeWidth: 4,
+      strokeWidth: 3,
     });
 
+    //Add Drawing Tool Events
+    //https://learn.microsoft.com/azure/azure-maps/drawing-tools-events
+    //mapRef.current.events.add("drawingmodechanged", mgr, drawingModeChanged);
+    mapRef.current.events.add("drawingcomplete", mgr, drawingCompleted);
+    mapRef.current.events.add("drawingerased", mgr, drawingErased);
     drawMgrRef.current = mgr;
+  }
+  function drawingErased(e:any) {
+    geometryCoordinates = drawMgrRef.current?.getSource().getShapes();
+  }
+  function drawingModeChanged(e:any) {
+    console.log(e);
+  }
+  function drawingCompleted(e:any) {
+    geometryCoordinates = drawMgrRef.current?.getSource().getShapes();
   }
 
   if (!drawMgrRef.current || !mapRef.current) return;
 
   const { mode } = drawMgrRef.current.getOptions();
-
-  if (!drawnBbox && drawMgrRef.current.getSource().getShapes().length > 0) {
-    //drawMgrRef.current.getSource().clear();
-    // シェイプの座標をデバッグ出力
-    console.log(JSON.stringify(drawMgrRef.current.getSource().toJson(), null, '    '));
-  }
 
   const handleShapeAdded = (shape: atlas.Shape): void => {
     const bounds = shape.getBounds();
@@ -63,11 +71,10 @@ export const useMapDrawTools = (
   };
 
   // Enable drawing mode
-  if (isDrawBboxMode && mode !== drawing.DrawingMode.drawRectangle) {
-    console.log("#### Enable drawing mode");
+  if (isDrawBboxMode && mode !== atlas2.drawing.DrawingMode.drawRectangle) {
     drawMgrRef.current.getSource().clear();
     drawMgrRef.current?.setOptions({
-      mode: drawing.DrawingMode.drawRectangle,
+      mode: atlas2.drawing.DrawingMode.drawRectangle,
     });
 
     mapRef.current.events.add(
@@ -78,10 +85,12 @@ export const useMapDrawTools = (
   }
 
   // Disable drawing mode
-  if (!isDrawBboxMode && mode !== drawing.DrawingMode.idle) {
-    console.log("#### Disable drawing mode");
+  if (!isDrawBboxMode && mode !== atlas2.drawing.DrawingMode.idle) {
     drawMgrRef.current?.setOptions({
-      mode: drawing.DrawingMode.idle,
+      mode: atlas2.drawing.DrawingMode.idle,
     });
   }
+
 };
+
+export var geometryCoordinates:any;

@@ -10,6 +10,8 @@ import {
   collectionOutlineLayer,
   itemLineLayerName,
   itemOutlineLayerName,
+  itemLineLayerName2,
+  itemOutlineLayerName2,
 } from "pages/Explore/utils/layers";
 import { makeLayerId } from "./useMosaicLayer";
 
@@ -45,13 +47,21 @@ const useMapEvents = (mapRef: React.MutableRefObject<atlas.Map | null>) => {
     (e: atlas.MapDataEvent) => {
       if (e.dataType === "style") {
         const layerMgr = e.map.layers;
-
+       
         if (layerMgr.getLayers()[0].getId() !== "base") {
           const hasOutlineLayer = layerMgr.getLayerById(itemLineLayerName);
           if (hasOutlineLayer) {
             layerMgr.move(itemLineLayerName, "labels");
             layerMgr.move(itemOutlineLayerName, itemLineLayerName);
           }
+
+          const hasOutlineLayer2 = layerMgr.getLayerById(itemLineLayerName2);
+          if (hasOutlineLayer2) {
+            layerMgr.move(itemLineLayerName2, "labels");
+            layerMgr.move(itemOutlineLayerName2, itemLineLayerName2);
+            console.log("### onStyleDataLoaded2");
+          }
+
           const hasCollectionLayer = layerMgr.getLayerById(collectionLineLayerName);
           if (hasCollectionLayer) {
             layerMgr.move(collectionLineLayer, "labels");

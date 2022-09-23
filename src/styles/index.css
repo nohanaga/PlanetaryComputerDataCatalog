@@ -478,10 +478,10 @@ a code {
     display: flex;
     flex-flow: column nowrap;
     width: 370px;
-    height: 200px;
+    height: 250px;
     box-sizing: border-box;
     background: rgb(255, 255, 255);
-    padding: 10px 0px;
+    padding: 5px 5px;
     border-radius: 2px;
     position: absolute;
     z-index: 1;

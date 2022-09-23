@@ -119,7 +119,6 @@ export const getUnhighlightItemFn = (map: atlas.Map) => {
   };
 };
 
-
 export const itemLineLayerName2 = "stac-item-line2";
 export const itemLineLayer2 = new atlas.layer.LineLayer(
   customDatasource,
