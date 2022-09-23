@@ -36,8 +36,8 @@ jobs:
             ${{ runner.os }}-npm-
       - name: Build docs and metadata
         run: ./scripts/update
-      - name: Test and lint
-        run: ./scripts/test
+      #- name: Test and lint
+      #  run: ./scripts/test
       - name: Inject disallow crawling for robots.txt
         run: |
           echo -e "User-agent: *\nDisallow: /\n" > public/robots.txt
