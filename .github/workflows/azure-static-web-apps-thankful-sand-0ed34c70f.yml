@@ -27,16 +27,16 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: Build docs and metadata
-        run: ./scripts/update
-      - name: Test and lint
-        run: ./scripts/test
+      #- name: Build docs and metadata
+      #  run: ./scripts/update
+      #- name: Test and lint
+      #  run: ./scripts/test
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token:
-            ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_SAND_0ED34C70F  }}
+            ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_FIELD_094F5AA00  }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           skip_deploy_on_missing_secrets: true
           action: "upload"
@@ -54,5 +54,5 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token:
-            ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_SAND_0ED34C70F  }}
+            ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_FIELD_094F5AA00  }}
           action: "close"
