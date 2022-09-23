@@ -13,7 +13,7 @@ export const useMapDrawTools = (
 ) => {
   const dispatch = useExploreDispatch();
   const drawMgrRef = useRef<atlas2.drawing.DrawingManager | null>(null);
-  const { isDrawBboxMode, drawnBbox } = useExploreSelector(s => s.map);
+  const { isDrawBboxMode } = useExploreSelector(s => s.map);
 
   // Initialize the drawing manager when the map is ready
   if (!drawMgrRef.current && mapRef.current && mapReady) {
@@ -45,9 +45,7 @@ export const useMapDrawTools = (
   function drawingErased(e:any) {
     geometryCoordinates = drawMgrRef.current?.getSource().getShapes();
   }
-  function drawingModeChanged(e:any) {
-    console.log(e);
-  }
+
   function drawingCompleted(e:any) {
     geometryCoordinates = drawMgrRef.current?.getSource().getShapes();
   }

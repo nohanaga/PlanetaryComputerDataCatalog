@@ -1,8 +1,4 @@
-import React, { useRef } from 'react'
 import * as atlas from "azure-maps-control";
-import { drawing } from "azure-maps-drawing-tools";
-//import { control } from "azure-maps-drawing-tools";
-import { useExploreSelector } from "pages/Explore/state/hooks";
 import { useEffect } from "react";
 import {
   itemLineLayer2,
@@ -19,12 +15,6 @@ const useCustomBoundsLayer = (
   mapRef: React.MutableRefObject<atlas.Map | null>,
   mapReady: boolean
 ) => {
-  const drawMgrRef = useRef<drawing.DrawingManager | null>(null);
-  const {
-    map: { boundaryShape },
-    detail,
-  } = useExploreSelector(s => s);
-  const boundaryPoly = boundaryShape ?? detail.selectedItem?.geometry;
 
   useEffect(() => {
     const map = mapRef.current;

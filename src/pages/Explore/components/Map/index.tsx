@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState, useRef } from "react";
 import * as atlas from "azure-maps-control";
-import { drawing } from "azure-maps-drawing-tools";
 import "azure-maps-control/dist/atlas.min.css";
 import "azure-maps-drawing-tools/dist/atlas-drawing.min.css";
 import { useExploreSelector } from "../../state/hooks";
