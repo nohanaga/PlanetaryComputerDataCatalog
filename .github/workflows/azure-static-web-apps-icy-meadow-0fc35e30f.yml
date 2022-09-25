@@ -23,6 +23,7 @@ jobs:
       REACT_APP_AZMAPS_KEY: ${{ secrets.AZMAPS_KEY }}
       REACT_APP_HUB_URL: ${{ secrets.HUB_URL }}
       REACT_APP_AUTH_URL: ${{ secrets.AUTH_URL }}
+      REACT_APP_FUNCIONS_KEY: ${{ secrets.FUNCIONS_KEY }}
     steps:
       - uses: actions/checkout@v2
         with:
