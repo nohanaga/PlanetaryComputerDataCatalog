@@ -386,15 +386,19 @@ MIT License
                 var clsTileLayer = azmaps.layer['TileLayer'];
                 var clsImageLayer = azmaps.layer['ImageLayer'];
                 var clsBubbleLayer = azmaps.layer['BubbleLayer'];
-        
+
                 mapLayers.forEach(function (l) {
                     var id = (l.layers && l.layers.length > 0) ? l.layers[0].id : l.getId();
-                    
+                    //console.log(id);
                     if (clsTileLayer && l instanceof clsTileLayer) {
                         userLayers.push(l);
                     }else if (clsImageLayer && l instanceof clsImageLayer) {
                         userLayers.push(l);
                     }else if (clsBubbleLayer && l instanceof clsBubbleLayer) {
+                        userLayers.push(l);
+                    }else if (id == "筆ポリゴン") {
+                        userLayers.push(l);
+                    }else if (id == "筆ポリゴン(線)") {
                         userLayers.push(l);
                     }
                 });

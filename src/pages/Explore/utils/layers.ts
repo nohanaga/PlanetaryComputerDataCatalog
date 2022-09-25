@@ -16,6 +16,7 @@ export const stacItemDatasource = new atlas.source.DataSource();
 export const stacCollectionDatasource = new atlas.source.DataSource();
 // add custom datasource 2022/09/16
 export const customDatasource = new atlas.source.DataSource();
+export const customFieldDatasource = new atlas.source.DataSource();
 
 export const collectionLineLayerName = "stac-collection-line";
 export const collectionLineLayer = new atlas.layer.LineLayer(
@@ -138,6 +139,36 @@ export const itemOutlineLayerName2 = "stac-item-outline2";
 export const itemOutlineLayer2 = new atlas.layer.LineLayer(
   customDatasource,
   itemOutlineLayerName2,
+  {
+    strokeColor: "#fff",
+    strokeWidth: 5,
+    filter: [
+      "any",
+      ["==", ["geometry-type"], "Polygon"],
+      ["==", ["geometry-type"], "MultiPolygon"],
+    ],
+  }
+);
+
+export const itemLineLayerName3 = "stac-item-line3";
+export const itemLineLayer3 = new atlas.layer.LineLayer(
+  customFieldDatasource,
+  itemLineLayerName3,
+  {
+    strokeColor: "rgb(241, 89, 0)",
+    strokeWidth: 3,
+    filter: [
+      "any",
+      ["==", ["geometry-type"], "Polygon"],
+      ["==", ["geometry-type"], "MultiPolygon"],
+    ],
+  }
+);
+
+export const itemOutlineLayerName3 = "stac-item-outline3";
+export const itemOutlineLayer3 = new atlas.layer.LineLayer(
+  customFieldDatasource,
+  itemOutlineLayerName3,
   {
     strokeColor: "#fff",
     strokeWidth: 5,

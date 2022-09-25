@@ -15,6 +15,7 @@ import {
   useCollectionBoundsLayer,
   useUrlState,
   useCustomBoundsLayer,
+  useCustomFieldLayer,
 } from "./hooks";
 import { ZoomMessage, ExtentMessage } from "../controls/MapMessages";
 
@@ -111,8 +112,8 @@ const ExploreMap = () => {
       });
     }
   }, [addAuthHeaders, sessionStatus]);
-
   useItemBoundsLayer(mapRef, mapReady);
+  useCustomFieldLayer(mapRef, mapReady);
   useCustomBoundsLayer(mapRef, mapReady);
   useCollectionBoundsLayer(mapRef, mapReady);
   useMosaicLayer(mapRef, mapReady);

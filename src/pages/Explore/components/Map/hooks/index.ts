@@ -8,6 +8,7 @@ import useZoomEvents from "./useZoomEvents";
 import { useMapZoomToLayer, useMapZoomToExtent } from "./useLayerNotices";
 import { useMapDrawTools } from "./useMapDrawTools";
 import useCustomBoundsLayer from "./useCustomBoundsLayer";
+import useCustomFieldLayer from "./useCustomFieldLayer";
 
 export {
   useUrlState,
@@ -21,4 +22,5 @@ export {
   useMapZoomToLayer,
   useMapZoomToExtent,
   useCustomBoundsLayer,
+  useCustomFieldLayer,
 };
