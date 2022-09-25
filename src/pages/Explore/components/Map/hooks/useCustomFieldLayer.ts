@@ -9,15 +9,16 @@ import {
 const geojson_url = "./2022_152269.json";
 
 //ファイルサイズが大きいので非同期処理
-const fetchGeoJsonData = async (map:atlas.Map) => {
+export const fetchGeoJsonData = async () => {
   var dataBounds = null;
+
   try {
     const res = await fetch(geojson_url);
     const json = await res.json();
-
+        customFieldDatasource.clear();
         //Add the GeoJSON data to the data source.
         customFieldDatasource.add(json);
-        
+
         //Calculate the bounding box of the GeoJSON data.
         var bounds = atlas.data.BoundingBox.fromData(json);
 
@@ -27,15 +28,16 @@ const fetchGeoJsonData = async (map:atlas.Map) => {
         } else {
             dataBounds = bounds;
         }
-
+/*
         //Update the map view to show the data.
         map.setCamera({
             bounds: dataBounds,
             padding: 50
         });
-
+*/
+    return "none"
   } catch (e) {
-    return "error"
+    return "none"
   }
 }
 
@@ -58,7 +60,7 @@ const useCustomFieldLayer = (
         filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']]	//Only render Polygon or MultiPolygon in this layer.
       });
       //Add a click event to the layer.
-      map.events.add('click', polygonLayer, featureClicked);
+      map.events.add('contextmenu', polygonLayer, featureClicked);
 
       //Add a layer for rendering line data.
       var lineLayer = new atlas.layer.LineLayer(customFieldDatasource, "筆ポリゴン(線2)", {
@@ -68,7 +70,7 @@ const useCustomFieldLayer = (
       });
 
       //Add a click event to the layer.
-      map.events.add('click', lineLayer, featureClicked);
+      map.events.add('contextmenu', lineLayer, featureClicked);
 
       //Add a layer for rendering point data.
       var pointLayer = new atlas.layer.SymbolLayer(customFieldDatasource, "筆ポリゴン(シンボル)", {
@@ -80,7 +82,7 @@ const useCustomFieldLayer = (
       });
 
       //Add a click event to the layer.
-      map.events.add('click', pointLayer, featureClicked);
+      map.events.add('contextmenu', pointLayer, featureClicked);
 
       //Add polygon and line layers to the map, below the labels..
       map.layers.add([
@@ -102,7 +104,7 @@ const useCustomFieldLayer = (
       });
 
       // load GeoFson data async
-      fetchGeoJsonData(map);
+      //fetchGeoJsonData(map);
 
     }
 
@@ -113,10 +115,10 @@ const useCustomFieldLayer = (
           var pos = e.position;
           var offset = [0, 0];
           var properties;
-
+          console.log(e.shapes)
           if (e.shapes[0] instanceof atlas.Shape) {
               properties = e.shapes[0].getProperties();
-
+              
               //If the shape is a point feature, show the popup at the points coordinate.
               if (e.shapes[0].getType() === 'Point') {
                   pos = e.shapes[0].getCoordinates();

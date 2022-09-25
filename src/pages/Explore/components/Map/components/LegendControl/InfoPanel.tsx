@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { geometryCoordinates } from "pages/Explore/components/Map/hooks/useMapDrawTools"
+import { fetchGeoJsonData } from "pages/Explore/components/Map/hooks/useCustomFieldLayer"
 import {
   DetailsList,
   DetailsListLayoutMode,
@@ -40,6 +41,7 @@ const InfoPanel = (values:any) => {
   const [items2, setItems2] = useState([{}]);
 
   const [visible, setSpinnerVisible] = useState("none");
+  const [polygonSpinner, setpolygonSpinnerVisible] = useState("none");
 
   function mkStat(key: string, values: any) {
     var retdict = {"key": key, "values": values }
@@ -127,11 +129,21 @@ const InfoPanel = (values:any) => {
         mkStat("id", "")]);
     }
   };
+
+  const loadClick = () => {
+    setpolygonSpinnerVisible("inline-block")
+    //load additional GeoJSON file
+    fetchGeoJsonData().then((value) => {
+      setpolygonSpinnerVisible(value)
+    });    
+  };
+
 /*
   const handleMessageChange = (event:any) => {
     console.log(event.target.value);
   };
 */
+
   const defaultWidth = 50;
   const columnWidths: Record<string, { min?: number; max?: number }> = {
     title: { min: 100, max: 300 },
@@ -171,7 +183,9 @@ const InfoPanel = (values:any) => {
 //<textarea value={message} onChange={handleMessageChange}/>
   return (
     <div className="hanapanel ms-Stack">
-      <button onClick={handleClick}>analyze</button>
+      <button className="btnAnalyze" onClick={handleClick}>analyze</button>
+      <button className="btnLoad" onClick={loadClick}>load polygon</button>
+      <Spinner className="polygonSpinner" size={SpinnerSize.xSmall} style={{display: polygonSpinner}}/>
       <div className="" style={{display:'flex', overflow: 'auto'}}>
         <div style={{ marginTop: 0, width: '50%', borderRight: '1px solid #cdcdcd', overflow: 'auto'}}>
           <Text styles={style}>

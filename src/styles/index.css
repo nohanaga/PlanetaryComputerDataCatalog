@@ -475,7 +475,6 @@ a code {
 }
 
 .hanapanel {
-    display: flex;
     flex-flow: column nowrap;
     width: 370px;
     height: 250px;
@@ -492,4 +491,17 @@ a code {
 
 #CodeOutput {
   height: 200px;
+}
+
+.btnAnalyze {
+  margin-right: 10px;
+  width:50%
+}
+
+.btnLoad {
+  width:40%
+}
+
+.polygonSpinner {
+  margin-left:5px
 }
