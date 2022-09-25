@@ -20,23 +20,12 @@ export const Home = () => {
         justifyContent: "center",
         alignItems: "flex-start",
       }}
-    >
+    > 
       <div className="grid-content">
-        <Text
-          block
-          variant="mega"
-          className="title"
-          styles={{
-            root: {
-              color: "#fff",
-              maxWidth: 580,
-              marginBottom: 40,
-              fontWeight: 100,
-            },
-          }}
-        >
-          A Planetary Computer for a Sustainable Future
-        </Text>
+        <a href="/explore?c=138.9781%2C37.0736&z=9.69&v=2&d=sentinel-2-l2a&m=Most+recent+%28low+cloud%29&r=Natural+color&s=false%3A%3A100%3A%3Atrue&ae=0">
+          <img alt="link" style={{width:'800px', height:'100%', backgroundColor: 'white'}} src="./images/hackathon_logo.svg"></img>
+        </a>
+
       </div>
     </div>
   );
