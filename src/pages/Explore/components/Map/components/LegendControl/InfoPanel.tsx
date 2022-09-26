@@ -75,32 +75,32 @@ const InfoPanel = (values:any) => {
             mkStat("min", stats[0].stats.min[0]),
             mkStat("max", stats[0].stats.max[0]),
             mkStat("mean", stats[0].stats.mean[0]),
-            mkStat("std", stats[0].stats.std[0]),
-            mkStat("id", stats[0].id)]);
+            mkStat("median", stats[0].stats['25%'][0]),
+            mkStat("datetime", stats[0].datetime)]);
 
           setItems2([
             mkStat("count", stats[1].stats.count[0]),
             mkStat("min", stats[1].stats.min[0]),
             mkStat("max", stats[1].stats.max[0]),
             mkStat("mean", stats[1].stats.mean[0]),
-            mkStat("std", stats[1].stats.std[0]),
-            mkStat("id", stats[1].id)]);
+            mkStat("median", stats[1].stats['25%'][0]),
+            mkStat("datetime", stats[1].datetime)]);
         } else {
           setItems([
             mkStat("count", stats[0].stats.count[0]),
             mkStat("min", stats[0].stats.min[0]),
             mkStat("max", stats[0].stats.max[0]),
             mkStat("mean", stats[0].stats.mean[0]),
-            mkStat("std", stats[0].stats.std[0]),
-            mkStat("id", stats[0].id)]);
+            mkStat("median", stats[0].stats['25%'][0]),
+            mkStat("datetime", stats[0].datetime)]);
 
           setItems2([
             mkStat("count", ""),
             mkStat("min", ""),
             mkStat("max", ""),
             mkStat("mean", ""),
-            mkStat("std", ""),
-            mkStat("id", "")]);
+            mkStat("median", ""),
+            mkStat("datetime", "")]);
         }
 
         setSpinnerVisible("none")
@@ -117,16 +117,16 @@ const InfoPanel = (values:any) => {
         mkStat("min", ""),
         mkStat("max", ""),
         mkStat("mean", ""),
-        mkStat("std", ""),
-        mkStat("id", "")]);
+        mkStat("median", ""),
+        mkStat("datetime", "")]);
 
       setItems2([
         mkStat("count", ""),
         mkStat("min", ""),
         mkStat("max", ""),
         mkStat("mean", ""),
-        mkStat("std", ""),
-        mkStat("id", "")]);
+        mkStat("median", ""),
+        mkStat("datetime", "")]);
     }
   };
 
